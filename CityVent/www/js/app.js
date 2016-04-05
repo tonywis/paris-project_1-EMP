@@ -22,3 +22,7 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.service('APIParisToken', function(){
+  this.token = "9374c2e664f094392c08daf3355c48e647b3653a9cb88cb97becb20a14838028";
+});
