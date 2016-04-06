@@ -1,10 +1,16 @@
 angular.module('app')
 .controller('QueFaireController', function(QueFaireService){
-    console.log('hi');
     
-    var results = QueFaireService.get_categories();
+    /*var resultsUnivers = QueFaireService.get_univers();*/
     
-    console.log(results);
+    var resultsActivities = QueFaireService.get_activities('18','4','10');
 
+    /*console.log('resultsUnivers')
+    console.log(resultsUnivers);*/
+    
+    console.log('resultsActivities')
+    console.log(resultsActivities);
+    
+    
 });
     

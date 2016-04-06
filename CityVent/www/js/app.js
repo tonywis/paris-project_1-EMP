@@ -24,13 +24,19 @@ angular.module('app', ['ionic','ionic-material'])
 })
 .config(function($urlRouterProvider,$stateProvider){
     
-    $urlRouterProvider.otherwise('/app');
+    $urlRouterProvider.otherwise('/app/categories');
     
     $stateProvider
     .state('app', {
         url: '/app',
         templateUrl: 'templates/menu.html',
         controller: 'QueFaireController'
+    })
+    .state('app/categories',{
+        url:'/app/categories',
+        templateUrl: 'templates/categories-list.html',
+        controller:'categoriesController',
+        controllerAs:'categoriesCtrl'
     });
     
 })
