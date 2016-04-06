@@ -22,6 +22,18 @@ angular.module('app', ['ionic','ionic-material'])
     }
   });
 })
+.config(function($urlRouterProvider,$stateProvider){
+    
+    $urlRouterProvider.otherwise('/app');
+    
+    $stateProvider
+    .state('app', {
+        url: '/app',
+        templateUrl: 'templates/menu.html',
+        controller: 'QueFaireController'
+    });
+    
+})
 
 .service('APIParisToken', function(){
   this.token = "9374c2e664f094392c08daf3355c48e647b3653a9cb88cb97becb20a14838028";
