@@ -3,8 +3,8 @@
 // angular.module is a global place for creating, registering and retrieving Angular modules
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
-angular.module('starter', ['ionic'])
 
+angular.module('app', ['ionic','ionic-material'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -22,3 +22,7 @@ angular.module('starter', ['ionic'])
     }
   });
 })
+
+.service('APIParisToken', function(){
+  this.token = "9374c2e664f094392c08daf3355c48e647b3653a9cb88cb97becb20a14838028";
+});
