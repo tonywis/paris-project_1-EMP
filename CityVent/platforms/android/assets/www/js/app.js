@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 
-angular.module('app', ['ionic','ionic-material'])
+angular.module('app', ['ionic','ionic-material', 'ngCordova'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -21,6 +21,24 @@ angular.module('app', ['ionic','ionic-material'])
       StatusBar.styleDefault();
     }
   });
+})
+.config(function($urlRouterProvider,$stateProvider){
+    
+    $urlRouterProvider.otherwise('/app/categories');
+    
+    $stateProvider
+    .state('app', {
+        url: '/app',
+        templateUrl: 'templates/menu.html',
+        controller: 'QueFaireController'
+    })
+    .state('app/categories',{
+        url:'/app/categories',
+        templateUrl: 'templates/categories-list.html',
+        controller:'categoriesController',
+        controllerAs:'categoriesCtrl'
+    });
+    
 })
 
 .service('APIParisToken', function(){

@@ -1,0 +1,11 @@
+<ion-view view-title="Categories">
+    <h1>Categories</h1>
+  <ion-content>
+    <ion-list>
+      <ion-item ng-repeat="categorie in categoriesCtrl.categoriesFictive">
+        {{categorie.nom}}
+      </ion-item>
+    </ion-list>
+    {{categoriesCtrl.lat}} ; {{categoriesCtrl.lng}}
+  </ion-content>
+</ion-view>
