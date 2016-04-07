@@ -2,7 +2,12 @@ angular.module('app')
 .service('QueFaireService', function($http, APIParisToken){
     
 	this.get_categories = function() {
-		return $http.get("https://api.paris.fr/api/data/1.2/QueFaire/get_categories/?token="+APIParisToken.token);
+		return $http.get("https://api.paris.fr/api/data/1.2/QueFaire/get_categories/?token="+APIParisToken.token)
+        .then(function success(results){
+            return results.data.data;
+        },function (error){
+            return error;
+        });;
 	};
     
     this.get_univers =function(){
