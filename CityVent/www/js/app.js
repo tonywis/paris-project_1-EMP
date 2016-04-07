@@ -34,8 +34,17 @@ angular.module('app', ['ionic','ionic-material', 'ngCordova'])
         controllerAs:'categoriesCtrl'
     })
     .state('propositions',{
-        
-    };
+        url:'/propositions',
+        templateUrl: 'templates/propositions-list.html',
+        controller:'propositionsController',
+        controllerAs:'propositionsCtrl'
+    }
+    .state('details',{
+        url:'/details',
+        templateUrl: 'templates/details.html',
+        controller:'detailsController',
+        controllerAs:'detailsCtrl'
+    });
     
 })
 
