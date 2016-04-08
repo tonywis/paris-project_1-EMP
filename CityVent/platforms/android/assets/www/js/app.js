@@ -24,19 +24,26 @@ angular.module('app', ['ionic','ionic-material', 'ngCordova'])
 })
 .config(function($urlRouterProvider,$stateProvider){
     
-    $urlRouterProvider.otherwise('/app/categories');
+    $urlRouterProvider.otherwise('/details');
     
     $stateProvider
-    .state('app', {
-        url: '/app',
-        templateUrl: 'templates/menu.html',
-        controller: 'QueFaireController'
-    })
-    .state('app/categories',{
-        url:'/app/categories',
+    .state('categories',{
+        url:'/categories',
         templateUrl: 'templates/categories-list.html',
         controller:'categoriesController',
         controllerAs:'categoriesCtrl'
+    })
+    .state('propositions',{
+        url:'/propositions',
+        templateUrl: 'templates/propositions-list.html',
+        controller:'propositionsController',
+        controllerAs:'propositionsCtrl'
+    })
+    .state('details',{
+        url:'/details',
+        templateUrl: 'templates/details.html',
+        controller:'detailsController',
+        controllerAs:'detailsCtrl'
     });
     
 })
