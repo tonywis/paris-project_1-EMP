@@ -9,7 +9,16 @@ angular.module("app")
 			"concert": 0,
 			"random": 0
 		};
-
+		/*
+		this.launch = launch(myFunctionInCtrl) {
+			QueFaireService.METHODE_CHE_PAS_QUOI
+				.then(function(response) {
+					//ici traitement des données / filtrage et ensutie formatage puis ensuite on balance dans this.data, et on tri ?
+					
+					//et enfin tadaaaam on appelle une méthode de callback dans ctrller
+					myFunctionInCtrl();
+				});
+		};*/
 
 		this.format_APIGoogle = function(response) {}
 
