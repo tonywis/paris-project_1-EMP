@@ -19,8 +19,8 @@ angular.module('app')
         });
     };
     
-    this.get_activities =function(categorie,univer,limit){
-        return $http.get("https://api.paris.fr/api/data/1.4/QueFaire/get_activities/?token="+APIParisToken.token+"&cid="+categorie+"&tag="+univer+"&created=0&start=0&end=0&offset=0&limit="+limit)
+    this.get_activities =function(categorie){
+        return $http.get("https://api.paris.fr/api/data/1.4/QueFaire/get_activities/?token="+APIParisToken.token+"&cid="+categorie+"&tag=0&created=0&start=0&end=0&offset=0&limit=10")
         .then(function success(results){
             return results.data.data;
         },function (error){
