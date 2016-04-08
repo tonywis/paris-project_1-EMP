@@ -24,7 +24,7 @@ angular.module('app', ['ionic','ionic-material', 'ngCordova'])
 })
 .config(function($urlRouterProvider,$stateProvider){
     
-    $urlRouterProvider.otherwise('/details');
+    $urlRouterProvider.otherwise('/categories');
     
     $stateProvider
     .state('categories',{
