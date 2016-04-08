@@ -1,13 +1,15 @@
 angular.module('app')
-.controller('propositionsController', function(openDataService,QueFaireService){
+.controller('propositionsController', function(openDataService,QueFaireService,$ionicHistory){
     
-    var tabConcert =[];
-    var tabClubbing =[];
-    var tabSpectacle =[];
+    var mv = this;
     
-    //OpenDataParis
-    var requestConcert = openDataServiceRequest("concert");
-    var requestClubbing = openDataServiceRequest("clubbing");
+    mv.tabConcert =[];
+    mv.tabClubbing =[];
+    mv.tabSpectacle =[];
+    
+    //OpenDataParis "concert" and "clubbing"
+    mv.requestConcert = openDataServiceRequest;
+    mv.requestClubbing = openDataServiceRequest;
     
     
     function openDataServiceRequest(tag){ 
@@ -20,18 +22,21 @@ angular.module('app')
         });
     };
     
-    /*
     //ParisAPI
-    var requestSpectacles = openDataServiceRequest(2)
+    mv.requestSpectacles = openDataServiceRequest(2);
     
-    //activitiId: 2=spectacles/15=humour/14=theatre
+    //activitiId: 2=spectacles
     function openDataServiceRequest(categorieId){ 
         QueFaireService.get_activities(categorieId).
         then(function(result){
            tabSpectacle =result;
             console.log(categorieId);
-            console.log(tabSpectacle.records);
+            console.log(tabSpectacle);
         }, function(error){
         });
-    };*/
+    };
+    
+    function back(){
+        $ionicHistory.goBack();
+    }
 });
