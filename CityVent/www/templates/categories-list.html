@@ -4,88 +4,50 @@
   <h1 class="title title-center header-item">Accueil</h1>
   
 </ion-header-bar> 
-<div class="content has-header animate-fade-in categories">
-	<div class="list condensed-space no-padding animate-blinds">
-		<div class="card dark-bg in">
+<div class="content has-header animate-fade-in categories" >
+	<div class="list condensed-space no-padding animate-blinds" ng-init="categoriesCtrl.imageBkg()">
+		<div class="card dark-bg in " ng-click="categoriesCtrl.countClickCategorie('restaurant')" on-hold="categoriesCtrl.resetCateg('restaurant'); " ng-style="{'background-image':'url('+categoriesCtrl.restaurantBkg+')'}" ng-class="{'pressing':pressing,'not-pressing':!pressing}"   ><!--ng-class="{'pressing':categoriesCtrl.pressing,'not-pressing':!categoriesCtrl.pressing}" >-->
 			<a href="" class="mon_a ">
 				<h2>Restaurants</h2>
-				<!-- <p>Blabla</p>	-->
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.request.restaurant == 0">{{ categoriesCtrl.request.restaurant }}</span>
 			</a>
 		</div>
-		<div class="card dark-bg in">
+		<div class="card dark-bg in" ng-click="categoriesCtrl.countClickCategorie('bar')" on-hold="categoriesCtrl.resetCateg('bar')"  ng-style="{'background-image':'url('+categoriesCtrl.barBkg+')'}">
 			<a href="" class="mon_a ">
 				<h2>Bars</h2>
-				<!--<p>Blabla</p>-->
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.request.bar == 0">{{ categoriesCtrl.request.bar }}</span>
 			</a>
 		</div>
-		<div class="card dark-bg in">
+		<div class="card dark-bg in" ng-click="categoriesCtrl.countClickCategorie('club')" on-hold="categoriesCtrl.resetCateg('club')" ng-style="{'background-image':'url('+categoriesCtrl.clubBkg+')'}">
 			<a href="" class="mon_a ">
 				<h2>Clubs</h2>
-				<!-- <p>Blabla</p> -->
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.request.club == 0">{{ categoriesCtrl.request.club }}</span>
+
 			</a>
 		</div>
-		<div class="card dark-bg in">
+
+		<div class="card dark-bg in" ng-click="categoriesCtrl.countClickCategorie('spectacle')" on-hold="categoriesCtrl.resetCateg('spectacle')" ng-style="{'background-image':'url('+categoriesCtrl.spectacleBkg+')'}">
 			<a href="" class="mon_a ">
 				<h2>Spectacles</h2>
-				<!--<p>Blabla</p>-->
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.request.spectacle == 0">{{ categoriesCtrl.request.spectacle }}</span>
+
 			</a>
 		</div>
-		<div class="card dark-bg in">
+		<div class="card dark-bg in" ng-click="categoriesCtrl.countClickCategorie('concert')" on-hold="categoriesCtrl.resetCateg('concert')" ng-style="{'background-image':'url('+categoriesCtrl.concertBkg+')'}">
 			<a href="" class="mon_a ">
 				<h2>Concerts</h2>
-				<!--<p>Blabla</p>-->
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.request.concert == 0">{{ categoriesCtrl.request.concert }}</span>
+
 			</a>
 		</div>
-		<div class="card dark-bg in">
-			<a href="" class="mon_a ">
+		<div class="card dark-bg in" ng-click="categoriesCtrl.countClickCategorie('random')" on-hold="categoriesCtrl.resetCateg('random')" ng-style="{'background-image':'url('+categoriesCtrl.randomBkg+')'}">
+			<a href="" class="mon_a " >
 				<h2>Random</h2>
-				<!--<p>Blabla</p>-->
-				<span class="badge badge-assertive">1</span>
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.request.random == 0">{{ categoriesCtrl.request.random }}</span>
 			</a>
 		</div>
-<!--<div class="list">
-<div class="row">
-<div class="card col ">
-  <div class="item item-text-wrap">
-	Concerts
-  </div>
-  	<span class="badge badge-assertive">1</span>
-
+		
 </div>
-<div class="card col">
- 	<div class="item item-text-wrap">
-	 Cinémas
- 	</div>
-	<span class="badge badge-assertive">1</span>
+<div class="ion-arrow-right-c flat icon-right button-calm" ng-hide="categoriesCtrl.request.concert == 0 && categoriesCtrl.request.bar == 0 && categoriesCtrl.request.club == 0 && categoriesCtrl.request.spectacle == 0 && categoriesCtrl.request.random == 0 && categoriesCtrl.request.restaurant == 0" ng-click="categoriesCtrl.nextStep()">
 </div>
-</div>
-<div class="row">
-<div class="card col ">
-  <div class="item item-text-wrap">
- 	Bars
-   </div>
-</div>
-<div class="card col ">
-  <div class="item item-text-wrap">
-Restaurants
-
- </div>
-</div>
-</div>
-<div class="row">
-<div class="card col ">
-  <div class="item item-text-wrap">
- 	Club
-   </div>
-</div>
-<div class="card col ">
-  <div class="item item-text-wrap">
- Random
-   </div>
-</div>
-</div>-->
-
-
-</div>
-<div class="ion-arrow-right-c flat icon-right button-calm" ></div>
 </div>

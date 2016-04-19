@@ -1,12 +1,7 @@
-/*.categories div.card:nth-child(odd){margin:0px 3px 3px 0px;}
-.categories div.card:nth-child(even){margin:0px 0px 3px 3px;}
-.categories .card .item{text-align: center;}
-.categories .card {height: 100px; }
-.categories div.row{padding: 1px 0;width:calc(100% - 12px); margin: 0 6px;}*/
-.categories div.card .badge.badge-assertive{/*float: right; */ top: 7px;
-    right: 7px; position:absolute; font-size: 13px; padding: 1px 5px;}
+
+.categories div.card .badge.badge-assertive{ top: 7px; right: 7px; position:absolute; font-size: 13px; padding: 1px 5px;}
 .categories div.ion-arrow-right-c {
-	    width: 50px;
+	width: 50px;
     height: 50px;
     line-height: 50px;
     border-radius: 50%;
@@ -18,11 +13,20 @@
     right: 25px;
     font-size: 25px;
 }
-.mon_a	{text-decoration: none;}
-div.card.dark-bg.in{background: url('http://ionicmaterial.com/preview/img/toronto.jpg') no-repeat center center; background-size: cover;    height: calc((100% / 6) - 9px);    
-    padding: 5px 20px;}
+.mon_a  {text-decoration: none;}
+.mon_a	h2{text-shadow: 4px 4px 13px rgba(150, 150, 150, 1);}
+div.card.dark-bg.in{background: #ccc no-repeat center top; background-size: cover; height: calc((100% / 6) - 9px);  padding: 5px 20px;}
 a.mon_a{border:none;}
 div.list{height: 100%}
-.categories.has-header {
-    height: 100%;
+.categories.has-header {height: 100%;}
+
+div.card.dark-bg.in.pressing:after {
+    width: 100%;
+    background-color: rgba(0,0,0,0.6);
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
