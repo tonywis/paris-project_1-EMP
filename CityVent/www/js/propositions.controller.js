@@ -1,13 +1,15 @@
 angular.module('app')
-.controller('propositionsController', function($ionicLoading, dataService){
+.controller('propositionsController', function($ionicLoading, $ionicHistory, dataService){
 
 	var propositionsCtrl = this;
 	propositionsCtrl.data = [];
 
 	propositionsCtrl.onFinish = function() {
-		propositionsCtrl.data = dataService.data;
-		if(dataService.loading == 0)
+		if(dataService.loading == 0) {
+			dataService.sortData();
 			$ionicLoading.hide();
+			propositionsCtrl.data = dataService.data;
+		}
 	}
 
 	propositionsCtrl.startRequest = function() {
@@ -16,5 +18,10 @@ angular.module('app')
 	}
 
 	propositionsCtrl.startRequest();
+
+
+	propositionsCtrl.back = function() {
+		$ionicHistory.goBack();
+	}
 
 });

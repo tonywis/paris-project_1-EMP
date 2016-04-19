@@ -40,7 +40,7 @@ angular.module('app', ['ionic','ionic-material', 'ngCordova'])
         controllerAs:'propositionsCtrl'
     })
     .state('details',{
-        url:'/details',
+        url:'/details:dataID',
         templateUrl: 'templates/details.html',
         controller:'detailsController',
         controllerAs:'detailsCtrl'

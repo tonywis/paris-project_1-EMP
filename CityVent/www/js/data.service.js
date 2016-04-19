@@ -46,8 +46,13 @@ angular.module("app")
 		sD.startRestaurant = function(callbackCtrl) {
 			// Google place
 			sD.addLoading();
-			sD.format_APIGoogle([{lieu: "Paris", dateEnd: 2}, {lieu: "Nantes", dateEnd: 1}]);
-			sD.sortData();
+			sD.format_APIGoogle([
+					{lieu: "Paris", dateEnd: 2},
+					{lieu: "Paris", dateEnd: 3},
+					{lieu: "Paris", dateEnd: 5},
+					{lieu: "Paris", dateEnd: 4},
+					{lieu: "Nantes", dateEnd: 1}
+				]);
 			sD.subLoading();
 			setTimeout(callbackCtrl, 1000);
 		}
