@@ -113,4 +113,11 @@ angular.module("app")
 				sD.loading = 0;
 		}
 
+		sD.getDataById = function(id) {
+			if(id >= 0 && id < sD.data.length) {
+				return sD.data[id];
+			}
+			return null;
+		}
+
 	});
