@@ -1,5 +1,5 @@
 angular.module("app")
-	.service('dataService', function(QueFaireService, openDataService) {
+	.service('dataService', function(QueFaireService, openDataService,googlePlacesService) {
 		var sD = this;
 		sD.data = [];
 		sD.request = {
@@ -19,6 +19,7 @@ angular.module("app")
 			if(sD.request.restaurant > 0)
 				sD.startRestaurant(callbackCtrl);
 
+            sD.request.bar = 1;
 			if(sD.request.bar > 0)
 				sD.startBar();
 
@@ -59,6 +60,13 @@ angular.module("app")
 
 		sD.startBar = function() {
 			// Google place
+            googlePlacesService.get_bar()
+				.then(function sucess(results) {
+					console.log(results);
+				}, function error(err) {
+					sD.subLoading();
+				});
+            
 			sD.addLoading();
 		}
 
