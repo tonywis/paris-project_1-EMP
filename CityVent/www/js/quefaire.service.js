@@ -1,6 +1,6 @@
 angular.module('app')
-.service('QueFaireService', function($http, APIParisToken){
-    
+.service('QueFaireService', function($http){
+    /*
 	this.get_categories = function() {
 		return $http.get("https://api.paris.fr/api/data/1.2/QueFaire/get_categories/?token="+APIParisToken.token)
         .then(function success(results){
@@ -26,5 +26,5 @@ angular.module('app')
         },function (error){
             return error;
         });
-    };
+    };*/
 });

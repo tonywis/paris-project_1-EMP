@@ -7,6 +7,7 @@
 angular.module('app', ['ionic','ionic-material', 'ngCordova'])
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
+    
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)
@@ -46,8 +47,4 @@ angular.module('app', ['ionic','ionic-material', 'ngCordova'])
         controllerAs:'detailsCtrl'
     });
     
-})
-
-.service('APIParisToken', function(){
-  this.token = "9374c2e664f094392c08daf3355c48e647b3653a9cb88cb97becb20a14838028";
 });
