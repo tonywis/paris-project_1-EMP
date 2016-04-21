@@ -68,11 +68,11 @@ angular.module('app')
 	
 	cV.imageBkg = function(){
 		$ionicLoading.show();
-		var promise1 =  $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=restaurant&fields=comp&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
-		var promise2 = $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=bar&fields=comp&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
-		var promise3 =  $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=nightclub&fields=comp&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
-		var promise4 = $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=spectacle&fields=comp&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
-		var promise5 =  $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=concert&fields=comp&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
+		var promise1 =  $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=restaurant&fields=preview&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
+		var promise2 = $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=bar&fields=preview&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
+		var promise3 =  $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=nightclub&fields=preview&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
+		var promise4 = $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=spectacle&fields=preview&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
+		var promise5 =  $http({method: 'GET',  url: 'https://api.gettyimages.com/v3/search/images?phrase=concert&fields=preview&page_size=20&exclude_nudity=true&file_types=eps%2Cpng&license_models=royaltyfree', headers:{'Api-Key':APIKeys.GETTY_IMG_TOKEN}});
 		var promise6 =[];
 
 		$q.all([promise1,promise2,promise3,promise4,promise5]).then(function(pdata){
