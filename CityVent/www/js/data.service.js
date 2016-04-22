@@ -15,14 +15,14 @@ angular.module("app")
 		
 		sD.launch = function(callbackCtrl) {
 			sD.data = [];
-			sD.request.restaurant = 1;
 			if(sD.request.restaurant > 0)
 				sD.startRestaurant(callbackCtrl);
 
-            sD.request.bar = 1;
+            
 			if(sD.request.bar > 0)
 				sD.startBar();
 
+            sD.request.club = 1;
 			if(sD.request.club > 0)
 				sD.startClub();
 
@@ -71,8 +71,9 @@ angular.module("app")
 		}
 
 		sD.startClub = function() {
-			openDataService.get_evenements()
+			openDataService.get_evenements("club")
 				.then(function sucess(results) {
+                    console.log(results);
 					sD.subLoading();
 				}, function error(err) {
 					sD.subLoading();
