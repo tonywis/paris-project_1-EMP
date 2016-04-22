@@ -28,7 +28,7 @@ angular.module('app')
 			 break;			 	 
 		}
 		cV.request = dataService.request;
-		cv.first = false;
+		cV.first = false;
 	}
 
 	cV.addWithLimit = function(nb_now) {
