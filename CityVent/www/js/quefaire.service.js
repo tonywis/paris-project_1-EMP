@@ -2,9 +2,9 @@ angular.module('app')
 .service('QueFaireService', function($http,APIKeys){
     
     function transformResult(result){
-            var randInt = Math.floor(Math.random()*10);
+            var randInt = Math.floor(Math.random()*result.results.length);
 
-            var dataChoosed= result[randInt];
+            var dataChoosed= result.results[randInt];
 
             return {
                 "address": dataChoosed.adresse,

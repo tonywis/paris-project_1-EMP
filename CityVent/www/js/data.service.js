@@ -4,9 +4,9 @@ angular.module("app")
 		sD.data = [];
 		sD.request = {
 			"restaurant": 0,
-			"bar": 0,
+			"bar": 1,
 			"club": 0,
-			"spectacle": 1,
+			"spectacle": 0,
 			"concert": 0,
 			"random": 0
 		};

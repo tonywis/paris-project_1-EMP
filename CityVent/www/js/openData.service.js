@@ -9,7 +9,6 @@ angular.module("app")
             var formated = [];
             for(var i=0; i<nb; i++) {
                 var randInt = Math.floor(Math.random()*results.length);
-
                 var dataChoosed= results[randInt].fields;
                 var object = {
                     "address": dataChoosed.address,
