@@ -1,6 +1,25 @@
 angular.module("app")
 	.service('openDataService', function($http){
-		
+    
+        this.get_clubs = function(num) {
+            return $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=clubbing")
+            .then(function success(results){
+                console.log(results);
+                return transformResult(only_open(results.data), num);
+            },function (error){
+                return error;
+            });
+        };
+    
+        this.get_concerts = function(num) {
+            return $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=cinemas-a-paris&sort=date_start&rows=100&refine.tags=concert")
+            .then(function success(results){
+                return transformResult(only_open(results.data), num);
+            },function (error){
+                return error;
+            });
+        };
+    
         function transformResult(results, nb){
             //console.log("format "+results);
             if(results.length == 0)
@@ -40,30 +59,12 @@ angular.module("app")
                 console.log("now :" +dateNow.toDateString());*/
                 if(dateEnd <= dateNow)
                     return false;
-                else if(dateStart <= dateNow || (dateStart.getDay() == dateNow.getDay() && dateStart.getDate() == dateNow.getDate() && dateStart.getFullYear() == dateNow.getFullYear()))
+                //check events before today || check events for today 
+                else if(dateStart <= dateNow || (dateStart.getDay() == dateNow.getDay() && dateStart.getMonth() == dateNow.getMonth() && dateStart.getFullYear() == dateNow.getFullYear()))
                     return true;
                 else
                     return false;
             });
         }
-    
-        this.get_clubs = function(num) {
-            return $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=clubbing")
-            .then(function success(results){
-                console.log(results);
-                return transformResult(only_open(results.data), num);
-            },function (error){
-                return error;
-            });
-        };
-    
-        this.get_concerts = function(num) {
-            return $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=cinemas-a-paris&sort=date_start&rows=100&refine.tags=concert")
-            .then(function success(results){
-                return transformResult(only_open(results.data), num);
-            },function (error){
-                return error;
-            });
-        };
 	});
 

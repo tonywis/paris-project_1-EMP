@@ -1,6 +1,25 @@
 angular.module('app')
 .service('QueFaireService', function($http,APIKeys){
     
+	this.get_categories = function() {
+		return $http.get("https://api.paris.fr/api/data/1.2/QueFaire/get_categories/?token="+APIKeys.PARIS_TOKEN)
+        .then(function success(results){
+            return results.data;
+        },function (error){
+            return error;
+        });;
+	};
+    
+    this.get_activities =function(categorie,limit){
+        return $http.get("https://api.paris.fr/api/data/1.4/QueFaire/get_activities/?token="+APIKeys.PARIS_TOKEN+"&cid="+categorie+"&tag=&created=0&start=0&end=0&offset=0&limit="+limit)
+        .then(function success(results){
+            console.log(results.data.data);
+            return transformResult(results.data.data);
+        },function (error){
+            return error;
+        });
+    };
+    
     function transformResult(result){
             var randInt = Math.floor(Math.random()*result.results.length);
 
@@ -22,23 +41,4 @@ angular.module('app')
                 "end": dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour + dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_end,
             };
     }
-    
-	this.get_categories = function() {
-		return $http.get("https://api.paris.fr/api/data/1.2/QueFaire/get_categories/?token="+APIKeys.PARIS_TOKEN)
-        .then(function success(results){
-            return results.data;
-        },function (error){
-            return error;
-        });;
-	};
-    
-    this.get_activities =function(categorie,limit){
-        return $http.get("https://api.paris.fr/api/data/1.4/QueFaire/get_activities/?token="+APIKeys.PARIS_TOKEN+"&cid="+categorie+"&tag=&created=0&start=0&end=0&offset=0&limit="+limit)
-        .then(function success(results){
-            console.log(results.data.data);
-            return transformResult(results.data.data);
-        },function (error){
-            return error;
-        });
-    };
 });
