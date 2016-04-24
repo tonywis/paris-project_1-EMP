@@ -13,16 +13,16 @@ angular.module('app')
         
 		return $http.get("https://maps.googleapis.com/maps/api/place/textsearch/json?query="+place+"+in+Paris&key="+APIKeys.GOOGLEPLACES_ANDROID_TOKEN)
             .then(function success(results){
-                return transformResult(only_open(results.data));
+                return transformResult(only_open(results.data.results));
             },function (error){
                 return error;
             });
 	}
     
-    function transformResult(result){
-            var randInt = Math.floor(Math.random()*result.length);
+    function transformResult(results){
+            var randInt = Math.floor(Math.random()*results.length);
 
-            var dataChoosed= result.results[randInt];
+            var dataChoosed= results[randInt];
 
             return {
                 "address": dataChoosed.formatted_address,
@@ -34,16 +34,17 @@ angular.module('app')
                 "image": null,
                 "price": null,
                 "link": null,
-                
-                "open": dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour + dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_start,
-                
-                "end": dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour + dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_end,
+                "open": null,
+                "end": null,
             };
     }
     
     function only_open(results) {
-        return results.results.filter(function(d) {
-            return d.opening_hours.open_now;
+        return results.filter(function(d) {
+            if(d.opening_hours)
+                return d.opening_hours.open_now;
+            else
+                return true;
         });
     }  
 });
