@@ -1,5 +1,6 @@
 angular.module('app')
 .service('googlePlacesService', function($http,APIKeys) {
+
     
 	this.get_restaurant = function(){
         return text_search("restaurant");

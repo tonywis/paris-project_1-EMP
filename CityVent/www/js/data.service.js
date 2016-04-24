@@ -5,7 +5,7 @@ angular.module("app")
 		sD.request = {
 			"restaurant": 0,
 			"bar": 0,
-			"club": 0,
+			"club": 1,
 			"spectacle": 0,
 			"concert": 0,
 			"random": 0
@@ -15,16 +15,16 @@ angular.module("app")
 		
 		sD.launch = function(callbackCtrl) {
 			sD.data = [];
+            
+            sD.request.restaurant = 1;
 			if(sD.request.restaurant > 0)
 				sD.startRestaurant(callbackCtrl);
-
             
 			if(sD.request.bar > 0)
-				sD.startBar();
+				sD.startBar(callbackCtrl);
 
-            sD.request.club = 1;
 			if(sD.request.club > 0)
-				sD.startClub();
+				sD.startClub(callbackCtrl);
 
 			if(sD.request.spectacle > 0)
 				sD.startSpectacle();
@@ -60,25 +60,27 @@ angular.module("app")
 
 		sD.startBar = function() {
 			// Google place
+            sD.addLoading();
             googlePlacesService.get_bar()
 				.then(function sucess(results) {
 					console.log(results);
+                    sD.data.push(results);
+                    sD.subLoading();
 				}, function error(err) {
 					sD.subLoading();
 				});
-            
-			sD.addLoading();
 		}
 
 		sD.startClub = function() {
-			openDataService.get_evenements("club")
+            // openData Clubbing
+            sD.addLoading();
+			openDataService.get_clubs()
 				.then(function sucess(results) {
                     console.log(results);
 					sD.subLoading();
 				}, function error(err) {
 					sD.subLoading();
 				});
-			sD.addLoading();
 		}
 
 		sD.startSpectacle = function() {
@@ -87,8 +89,15 @@ angular.module("app")
 		}
 
 		sD.startConcert = function() {
-			// openData Evenements
-			sD.addLoading();
+			// openData Concerts
+            sD.addLoading();
+			openDataService.get_clubs()
+				.then(function sucess(results) {
+                    console.log(results);
+					sD.subLoading();
+				}, function error(err) {
+					sD.subLoading();
+				});
 		}
 
 		sD.startRandom = function() {
