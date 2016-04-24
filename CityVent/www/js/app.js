@@ -46,5 +46,4 @@ angular.module('app', ['ionic','ionic-material', 'ngCordova'])
         controller:'detailsController',
         controllerAs:'detailsCtrl'
     });
-    
 });
