@@ -59,8 +59,8 @@ angular.module("app")
                 console.log("now :" +dateNow.toDateString());*/
                 if(dateEnd <= dateNow)
                     return false;
-                //check events before today || check events for today 
-                else if(dateStart <= dateNow || (dateStart.getDay() == dateNow.getDay() && dateStart.getMonth() == dateNow.getMonth() && dateStart.getFullYear() == dateNow.getFullYear()))
+                //check events started before now || check events will start between now and tonight 
+                else if(dateStart <= dateNow || (dateStart.getDate() == dateNow.getDate() && dateStart.getMonth() == dateNow.getMonth() && dateStart.getFullYear() == dateNow.getFullYear()))
                     return true;
                 else
                     return false;
