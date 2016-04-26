@@ -1,6 +1,7 @@
 angular.module("app")
 	.service('openDataService', function($http){
     
+    //request to get n*num clubs for today
         this.get_clubs = function(num) {
             return $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=clubbing")
             .then(function success(results){
@@ -11,6 +12,7 @@ angular.module("app")
             });
         };
     
+    //request to get n*num concerts clubs for today
         this.get_concerts = function(num) {
             return $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=cinemas-a-paris&sort=date_start&rows=100&refine.tags=concert")
             .then(function success(results){
@@ -20,16 +22,21 @@ angular.module("app")
             });
         };
     
-        function transformResult(results, nb){
+    //function to select randomly n*num informations in all results from the request
+        function transformResult(results, num){
             //console.log("format "+results);
-            if(results.length == 0)
-                return [];
-            nb = results.length < nb ? results.length : nb;
             var formated = [];
-            for(var i=0; i<nb; i++) {
+            
+            //if no results, return nothing
+            if(results.length == 0)
+                return formated;
+            
+            //take the minimun between the numbers of data and the numbers asked
+            num = results.length < num ? results.length : num;
+            for(var i=0; i<num; i++) {
                 var randInt = Math.floor(Math.random()*results.length);
                 var dataChoosed= results[randInt].fields;
-                var object = {
+                var randObject = {
                     "address": dataChoosed.address,
                     "place_name": dataChoosed.placename,
                     "name": dataChoosed.title,
@@ -42,13 +49,14 @@ angular.module("app")
                     "price": dataChoosed.pricing_info,
                     "link": dataChoosed.link
                 };
-                formated.push(object);
+                formated.push(randObject);
                 results.splice(randInt, 1);
             }
-            console.log(formated);
+            //console.log(formated);
             return formated;
         }
 
+    //filter all places/events who don't open today
         function only_open(results) {
             return results.records.filter(function(d) {
                 var dateStart = new Date(d.fields.date_start);
