@@ -4,7 +4,7 @@ angular.module("app")
 		sD.data = [];
 		sD.request = {
 			"restaurant": 0,
-			"bar": 1,
+			"bar": 0,
 			"club": 0,
 			"spectacle": 0,
 			"concert": 0,
@@ -25,77 +25,68 @@ angular.module("app")
 				sD.startClub(callbackCtrl);
 
 			if(sD.request.spectacle > 0)
-				sD.startSpectacle();
+				sD.startSpectacle(callbackCtrl);
 
 			if(sD.request.concert > 0)
-				sD.startConcert();
+				sD.startConcert(callbackCtrl);
 
 			if(sD.request.random > 0)
-				sD.startRandom();
+				sD.startRandom(callbackCtrl);
 		};
 
 		sD.startRestaurant = function(callbackCtrl) {
 			// Google place
 			sD.addLoading();
-			sD.format_APIGoogle([
-					{lieu: "Paris", dateEnd: 2},
-					{lieu: "Paris", dateEnd: 3},
-					{lieu: "Paris", dateEnd: 5},
-					{lieu: "Paris", dateEnd: 4},
-					{lieu: "Nantes", dateEnd: 1}
-				]);
-			sD.subLoading();
-			setTimeout(callbackCtrl, 1000);
+			googlePlacesService.get_restaurant(sD.request.restaurant, function(results) {
+				sD.data.concat(results);
+				sD.subLoading();
+				callbackCtrl();
+			});
 		}
 
-		sD.startBar = function() {
+		sD.startBar = function(callbackCtrl) {
 			// Google place
-            sD.addLoading();
-            googlePlacesService.get_bar()
-				.then(function sucess(results) {
-					console.log(results);
-                    sD.data.push(results);
-                    sD.subLoading();
-				}, function error(err) {
-					sD.subLoading();
-				});
+			sD.addLoading();
+			googlePlacesService.get_bar(sD.request.bar, function(results) {
+				sD.data.concat(results);
+				sD.subLoading();
+				callbackCtrl();
+			});
 		}
 
-		sD.startClub = function() {
-            // openData Clubbing
-            sD.addLoading();
-			openDataService.get_clubs(sD.request.club)
-				.then(function sucess(results) {
-                    console.log(results);
-                    sD.subLoading();
-				});
-            sD.subLoading();
+		sD.startClub = function(callbackCtrl) {
+			// openData Clubbing
+			sD.addLoading();
+			openDataService.get_clubs(sD.request.club, function(results) {
+				sD.data.concat(results);
+				sD.subLoading();
+				callbackCtrl();
+			});
 		}
-        
-        sD.startConcert = function() {
+
+		sD.startConcert = function(callbackCtrl) {
 			// openData Concerts
-            sD.addLoading();
-			openDataService.get_clubs(sD.request.concert)
-				.then(function (results) {
-                    console.log(results);
-                    sD.subLoading();
-				});
+			sD.addLoading();
+			openDataService.get_clubs(sD.request.concert, function(results) {
+				sD.data.concat(results);
+				sD.subLoading();
+				callbackCtrl();
+			});
 		}
 
-		sD.startSpectacle = function() {
+		sD.startSpectacle = function(callbackCtrl) {
 			// Paris API
 			sD.addLoading();
-			QueFaireService.get_activities("2",10)
-				.then(function sucess(results) {
-                    console.log(results);
-                    sD.subLoading();
-				});
-            sD.subLoading();
+			QueFaireService.get_activities("2",10, sD.request.spectacle, function(results) {
+				sD.data.concat(results);
+				sD.subLoading();
+				callbackCtrl();
+			});
 		}
 
-		sD.startRandom = function() {
+		sD.startRandom = function(callbackCtrl) {
 			// Google place or openDataEvenements
-			sD.addLoading();
+			// QU'EST-CE QU'ON FAIT ?
 		}
 
 		sD.sortData = function() {

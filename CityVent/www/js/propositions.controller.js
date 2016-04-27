@@ -19,7 +19,6 @@ angular.module('app')
 
 	propositionsCtrl.startRequest();
 
-
 	propositionsCtrl.back = function() {
 		$ionicHistory.goBack();
 	}
