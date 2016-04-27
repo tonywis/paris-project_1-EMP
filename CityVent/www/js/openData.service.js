@@ -62,9 +62,7 @@ angular.module("app")
                 var dateStart = new Date(d.fields.date_start);
                 var dateEnd = new Date(d.fields.date_end);
                 var dateNow = new Date();
-                /*console.log("start : "+dateStart.toDateString());
-                console.log("end : "+dateEnd.toDateString());
-                console.log("now :" +dateNow.toDateString());*/
+                
                 if(dateEnd <= dateNow)
                     return false;
                 //check events started before now || check events will start between now and tonight 
