@@ -34,7 +34,8 @@ angular.module('app')
 	cV.addWithLimit = function(nb_now) {
 		if((nb_now + 1) <= LIMIT_BY_CAT)
 			return 1;
-		return 0;
+		else
+			return 0;
 	}
 
 	cV.nextStep = function(){
