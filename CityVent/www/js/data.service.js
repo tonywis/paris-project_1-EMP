@@ -14,7 +14,7 @@ angular.module("app")
 		sD.loading = 0;
 
 		sD.onFinish = function(callbackCtrl, results) {
-			sD.data.concat(results);
+			sD.data = sD.data.concat(results);
 			sD.subLoading();
 			callbackCtrl();
 		}
