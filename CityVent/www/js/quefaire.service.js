@@ -62,6 +62,9 @@ angular.module('app')
             
             return results.filter(function(d) {
                 //take the date of each event, they are ordered chronologicaly, the latest of the array is the sooner of all
+                if(d.occurrences.length[0] !== undefined){
+                    return false;
+                }
                 var dateEvent = new Date(d.occurrences[d.occurrences.length-1].jour);
                 var dateNow = new Date();
                 
