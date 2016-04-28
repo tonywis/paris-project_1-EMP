@@ -11,7 +11,7 @@ angular.module('app')
 			propositionsCtrl.data = dataService.data;
 		}
 	}
-	
+
 	propositionsCtrl.back = function() {
 		$ionicHistory.goBack();
 	}
@@ -24,6 +24,10 @@ angular.module('app')
 		}
 		else
 			propositionsCtrl.back();
+	}
+
+	propositionsCtrl.is_loading = function() {
+		return dataService.loading > 0;
 	}
 
 	propositionsCtrl.startRequest();
