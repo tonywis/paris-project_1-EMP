@@ -6,12 +6,18 @@ angular.module("app")
 			"restaurant": 0,
 			"bar": 0,
 			"club": 0,
-			"spectacle": 1,
+			"spectacle": 0,
 			"concert": 0,
 			"random": 0
 		};
 		// nb de requetes en cours
 		sD.loading = 0;
+
+		sD.onFinish = function(callbackCtrl, results) {
+			sD.data.concat(results);
+			sD.subLoading();
+			callbackCtrl();
+		}
 		
 		sD.launch = function(callbackCtrl) {
 			sD.data = [];
@@ -38,9 +44,7 @@ angular.module("app")
 			// Google place
 			sD.addLoading();
 			googlePlacesService.get_restaurant(sD.request.restaurant, function(results) {
-				sD.data.concat(results);
-				sD.subLoading();
-				callbackCtrl();
+				sD.onFinish(callbackCtrl, results);
 			});
 		}
 
@@ -48,9 +52,7 @@ angular.module("app")
 			// Google place
 			sD.addLoading();
 			googlePlacesService.get_bar(sD.request.bar, function(results) {
-				sD.data.concat(results);
-				sD.subLoading();
-				callbackCtrl();
+				sD.onFinish(callbackCtrl, results);
 			});
 		}
 
@@ -58,9 +60,7 @@ angular.module("app")
 			// openData Clubbing
 			sD.addLoading();
 			openDataService.get_clubs(sD.request.club, function(results) {
-				sD.data.concat(results);
-				sD.subLoading();
-				callbackCtrl();
+				sD.onFinish(callbackCtrl, results);
 			});
 		}
 
@@ -68,9 +68,7 @@ angular.module("app")
 			// openData Concerts
 			sD.addLoading();
 			openDataService.get_clubs(sD.request.concert, function(results) {
-				sD.data.concat(results);
-				sD.subLoading();
-				callbackCtrl();
+				sD.onFinish(callbackCtrl, results);
 			});
 		}
 
@@ -78,9 +76,7 @@ angular.module("app")
 			// Paris API
 			sD.addLoading();
 			QueFaireService.get_activities("2",10, sD.request.spectacle, function(results) {
-				sD.data.concat(results);
-				sD.subLoading();
-				callbackCtrl();
+				sD.onFinish(callbackCtrl, results);
 			});
 		}
 
