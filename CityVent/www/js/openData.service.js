@@ -2,23 +2,23 @@ angular.module("app")
 	.service('openDataService', function($http){
     
     //request to get n*num clubs for today
-        this.get_clubs = function(num) {
-            return $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=clubbing")
-            .then(function success(results){
-                console.log(results);
-                return transformResult(only_open(results.data), num);
+        this.get_clubs = function(num, callbackDataService) {
+            $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=clubbing")
+            .then(function (results){
+                //console.log(results);
+                callbackDataService(transformResult(only_open(results.data), num));
             },function (error){
-                return error;
+                callbackDataService([]);
             });
         };
     
     //request to get n*num concerts clubs for today
-        this.get_concerts = function(num) {
-            return $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=cinemas-a-paris&sort=date_start&rows=100&refine.tags=concert")
-            .then(function success(results){
-                return transformResult(only_open(results.data), num);
+        this.get_concerts = function(num, callbackDataService) {
+            $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=cinemas-a-paris&sort=date_start&rows=100&refine.tags=concert")
+            .then(function (results){
+                callbackDataService(transformResult(only_open(results.data), num));
             },function (error){
-                return error;
+                callbackDataService([]);
             });
         };
     

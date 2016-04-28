@@ -4,7 +4,7 @@ angular.module('app')
 	var LIMIT_BY_CAT = 10;
 	cV.first = true;
 
-	cV.request = dataService.request;
+	cV.dataService = dataService;
 
 	cV.onClickCategorie = function(id){
 		switch(id){
@@ -27,7 +27,6 @@ angular.module('app')
 				 dataService.request.random += cV.addWithLimit(dataService.request.random);
 			 break;			 	 
 		}
-		cV.request = dataService.request;
 		cV.first = false;
 	}
 
@@ -45,10 +44,10 @@ angular.module('app')
 	cV.resetCateg = function (caseCateg){
 		switch(caseCateg){
 			case 'restaurant' :
-				 dataService.request.restaurant =0;
+				 dataService.request.restaurant = 0;
 				 break;
 			 case 'bar':
-		 	 	 dataService.request.bar =0;
+		 	 	 dataService.request.bar = 0;
 			 	 break;
 		 	 case 'club' :
 		 	 	 dataService.request.club = 0;
@@ -63,8 +62,6 @@ angular.module('app')
 				 dataService.request.random = 0;
 			 break;			 	 
 		}
-		cV.request = dataService.request;
-		$scope.pressing = true;
 	}
 	
 	cV.imageBkg = function(){
@@ -96,12 +93,5 @@ angular.module('app')
 			$ionicLoading.hide();
 		});   
 	}
-
-	cV.getNbSelected = function() {
-		var nb = cV.request.restaurant + cV.request.bar + cV.request.club + cV.request.spectacle + cV.request.concert + cV.request.random;
-		console.log(nb);
-		return nb;
-	}
-
 
 });

@@ -10,7 +10,7 @@ angular.module("app")
 			"concert": 0,
 			"random": 0
 		};
-		// nb de requetes en cours
+		// nb request in progress
 		sD.loading = 0;
 
 		sD.onFinish = function(callbackCtrl, results) {
@@ -99,6 +99,16 @@ angular.module("app")
 			sD.loading -= 1;
 			if(sD.loading < 0)
 				sD.loading = 0;
+		}
+
+		sD.getNbSelected = function() {
+			var nb = sD.request.restaurant + sD.request.bar + sD.request.club + sD.request.spectacle + sD.request.concert + sD.request.random;
+			//console.log(nb);
+			return nb;
+		}
+
+		sD.has_requests = function() {
+			return sD.getNbSelected() > 0;
 		}
 
 		sD.getDataById = function(id) {

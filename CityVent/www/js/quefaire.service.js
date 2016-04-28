@@ -2,12 +2,12 @@ angular.module('app')
 .service('QueFaireService', function($http,APIKeys){
     
     //request to get num*clubs for today
-    this.get_activities =function(categorie,limit,num){
-        return $http.get("https://api.paris.fr/api/data/1.4/QueFaire/get_activities/?token="+APIKeys.PARIS_TOKEN+"&cid="+categorie+"&tag=&created=0&start=0&end=0&offset=0&limit="+limit)
-        .then(function success(results){
-            return transformResult(only_open(results.data.data),num);
+    this.get_activities =function(categorie,limit,num, callbackDataService){
+        $http.get("https://api.paris.fr/api/data/1.4/QueFaire/get_activities/?token="+APIKeys.PARIS_TOKEN+"&cid="+categorie+"&tag=&created=0&start=0&end=0&offset=0&limit="+limit)
+        .then(function (results){
+            callbackDataService(transformResult(only_open(results.data.data),num));
         },function (error){
-            return error;
+            callbackDataService([]);
         });
     };
     

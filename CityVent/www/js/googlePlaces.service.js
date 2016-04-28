@@ -2,23 +2,22 @@ angular.module('app')
 .service('googlePlacesService', function($http,APIKeys) {
     
     //request to get n*nb restaurants for today
-	this.get_restaurant = function(nb){
-        return text_search("restaurant",nb);
+	this.get_restaurant = function(nb, callbackDataService){
+        text_search("restaurant",nb, callbackDataService);
     }
     
     //request to get n*nb bars for today
-    this.get_bar = function(nb){
-        return text_search("bar",nb);
+    this.get_bar = function(nb, callbackDataService){
+        text_search("bar",nb, callbackDataService);
     }
     
     //request to get n*nb places for today
-    function text_search(place,nb) {
-        
-		return $http.get("https://maps.googleapis.com/maps/api/place/textsearch/json?query="+place+"+in+Paris&key="+APIKeys.GOOGLEPLACES_ANDROID_TOKEN)
-            .then(function success(results){
-                return transformResult(only_open(results.data.results),nb);
+    function text_search(place,nb, callbackDataService) {
+		$http.get("https://maps.googleapis.com/maps/api/place/textsearch/json?query="+place+"+in+Paris&key="+APIKeys.GOOGLEPLACES_ANDROID_TOKEN)
+            .then(function (results){
+                callbackDataService(transformResult(only_open(results.data.results),nb));
             },function (error){
-                return error;
+                callbackDataService([]);
             });
 	}
     

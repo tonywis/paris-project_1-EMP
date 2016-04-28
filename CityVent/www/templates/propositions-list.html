@@ -4,6 +4,9 @@
 </ion-header-bar>
 
 <div class="content has-header">
+    <div class="col-90" ng-show="propositionsCtrl.data.lenght == 0">
+        <p>Nous n'avons rien trouvé pour ce soir, nous en sommes désolé.</p>
+    </div>
     <div ng-repeat="(key, p) in propositionsCtrl.data track by $index" class="card-animation card" style="animation-delay: {{($index * 80)}}ms">
             <div ui-sref="details({dataID: key})" class="item item-avatar waves-effect waves-block waves-dark">
                 <span class="avatar" style="background-image: url('')"></span>
