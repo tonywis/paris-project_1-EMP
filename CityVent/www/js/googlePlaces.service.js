@@ -46,7 +46,7 @@ angular.module('app')
                 "price": null,
                 "link": null,
                 "open": null,
-                "end": null,
+                "end": null
             };
             formated.push(randObject);
         }

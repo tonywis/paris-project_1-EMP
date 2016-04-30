@@ -3,21 +3,23 @@
   <h1 class="title">Votre soirée</h1>
 </ion-header-bar>
 
-<div class="content has-header">
-<div class="row row-center">
-    <div class="col col-80 col-offset-10" ng-show="propositionsCtrl.data.length == 0 && propositionsCtrl.is_loading() == false">
-        <p class="card padding text-center"><span class="ion-sad-outline icon-size"></span><br /><br />
-            Nous n'avons rien trouvé pour ce soir, nous en sommes désolé.</p>
+<div class="content has-header bg-color propositions">
+    <div class="row row-center" ng-show="propositionsCtrl.data.length == 0 && propositionsCtrl.is_loading() == false">
+        <div class="col col-80 col-offset-10" >
+            <p class="card padding text-center"><span class="ion-sad-outline icon-size"></span><br /><br />
+                Nous n'avons rien trouvé pour ce soir, nous en sommes désolé.</p>
+        </div>
     </div>
-</div>
     <div ng-repeat="(key, p) in propositionsCtrl.data track by $index" class="card-animation card" style="animation-delay: {{($index * 80)}}ms">
-            <div ui-sref="details({dataID: key})" class="item item-avatar waves-effect waves-block waves-dark">
-                <span class="avatar" style="background-image: url('')"></span>
-                <strong>Title</strong>
-                <p>{{ p.lieu }}</p>
+            <div ui-sref="details({dataID: key})" class="item item-avatar waves-effect waves-block waves-dark prop">
+                <span class="avatar" style="background-image: url('{{ p.image_thumb == null ? 'img/img_not_found.svg' : p.image_thumb; }}')"></span>
+                <strong ng-bind-html="p.name == null ? p.place_name : p.name" class="prop"></strong>
+                <p ng-bind-html="p.address" style="color: grey; margin-bottom: 10px;"></p>
+                <span ng-bind-html="p.small_description|htmlToPlaintext" class="prop" ng-show="p.small_description != null"></span>
                 <div class="card-footer text-left">
                     <i class="icon ion-clock"></i>
-                    <span>start</span>
+                    <span ng-show="p.open == null">Ouvert</span>
+                    <span ng-show="p.open != null">{{ (p.open|date:"HH:mm")+" - "+(p.end|date:"HH:mm") }}</span>
                 </div>
             </div>
     </div>

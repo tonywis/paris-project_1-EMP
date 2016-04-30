@@ -11,32 +11,45 @@ angular.module('app')
         });
     };
     
-    function transformResult(result,num){
+    function mergeDateHours(dateStr, hoursStr) {
+        hours_array = hoursStr.split(':');
+        dateResult = new Date(dateStr);
+        dateResult.setHours(hours_array[0]);
+        dateResult.setMinutes(hours_array[1]);
+        dateResult.setSeconds(hours_array[2]);
+        return dateResult;
+    }
+
+    function transformResult(results,num){
         var formated = [];
 
         //if no results, return nothing
-        if(result.length == 0)
+        if(results.length == 0)
             return formated;
 
         //take the minimun between the numbers of data and the numbers asked
-        num = result.length < num ? result.length : num;
+        num = results.length < num ? results.length : num;
 
         for(var i=0; i<num; i++) {
-            var randInt = Math.floor(Math.random()*result.results.length);
-            var dataChoosed= result.results[randInt];
+            var randInt = Math.floor(Math.random()*results.length);
+            var dataChoosed= results[randInt];
+            var dateOpen_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour;
+            var hourOpen_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_start;
+            var dateEnd_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour;
+            var hourEnd_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_end;
             var randObject = {
                 "address": dataChoosed.adresse,
                 "place_name": dataChoosed.lieu,
                 "name": dataChoosed.nom,
-                "small_description": dataChoosed.small_description,
-                "description": dataChoosed.description,
+                "small_description": he.decode(dataChoosed.small_description),
+                "description": he.decode(dataChoosed.description),
                 "image_thumb": null,
                 "image": null,
                 "price": null,
                 "link": null,
-                //concat for good date format
-                "open": dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour + dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_start,
-                "end": dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour + dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_end,
+                //merge for good date format
+                "open": mergeDateHours(dateOpen_str, hourOpen_str),
+                "end": mergeDateHours(dateEnd_str, hourEnd_str)
             };
             formated.push(randObject);
             results.splice(randInt, 1);
