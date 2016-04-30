@@ -11,19 +11,19 @@ angular.module('app')
         });
     };
     
-    function transformResult(result,num){
+    function transformResult(results,num){
         var formated = [];
 
         //if no results, return nothing
-        if(result.length == 0)
+        if(results.length == 0)
             return formated;
 
         //take the minimun between the numbers of data and the numbers asked
-        num = result.length < num ? result.length : num;
+        num = results.length < num ? results.length : num;
 
         for(var i=0; i<num; i++) {
-            var randInt = Math.floor(Math.random()*result.results.length);
-            var dataChoosed= result.results[randInt];
+            var randInt = Math.floor(Math.random()*results.length);
+            var dataChoosed= results[randInt];
             var randObject = {
                 "address": dataChoosed.adresse,
                 "place_name": dataChoosed.lieu,
