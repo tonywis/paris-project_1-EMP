@@ -67,7 +67,7 @@ angular.module("app")
 		sD.startConcert = function(callbackCtrl) {
 			// openData Concerts
 			sD.addLoading();
-			openDataService.get_clubs(sD.request.concert, function(results) {
+			openDataService.get_concerts(sD.request.concert, function(results) {
 				sD.onFinish(callbackCtrl, results);
 			});
 		}
@@ -87,7 +87,11 @@ angular.module("app")
 
 		sD.sortData = function() {
 			sD.data.sort(function(a, b) {
-				return a.dateEnd < b.dateEnd ? -1 : 1;
+				if(a.end == null)
+					return 1
+				if(b.end == null)
+					return -1;
+				return a.end < b.end ? -1 : 1;
 			});
 		}
 

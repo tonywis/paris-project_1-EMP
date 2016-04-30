@@ -14,7 +14,7 @@ angular.module("app")
     
     //request to get n*num concerts clubs for today
         this.get_concerts = function(num, callbackDataService) {
-            $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=cinemas-a-paris&sort=date_start&rows=100&refine.tags=concert")
+            $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=concert")
             .then(function (results){
                 callbackDataService(transformResult(only_open(results.data), num));
             },function (error){
@@ -44,8 +44,8 @@ angular.module("app")
                     "description": dataChoosed.free_text,
                     "image_thumb": dataChoosed.image_thumb,
                     "image": dataChoosed.image,
-                    "open": dataChoosed.date_start,
-                    "end": dataChoosed.date_end,
+                    "open": new Date(dataChoosed.date_start),
+                    "end": new Date(dataChoosed.date_end),
                     "price": dataChoosed.pricing_info,
                     "link": dataChoosed.link
                 };
