@@ -1,6 +1,7 @@
 .categories {
     height: 100%;
     overflow: scroll;
+    padding-bottom: 25px;
 }
 
 .categories div.card .badge.badge-assertive{
