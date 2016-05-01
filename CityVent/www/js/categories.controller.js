@@ -5,6 +5,7 @@ angular.module('app')
 	cV.first = true;
 
 	cV.dataService = dataService;
+	locationService.getCurrentLocation();
 
 	cV.onClickCategorie = function(id){
 		switch(id){
