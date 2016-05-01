@@ -5,24 +5,30 @@
 
 <div class="ionic has-header details" ng-init="detailsCtrl.getData()">
 	<div class="hero has-mask"
-				style="background-image: url('{{ detailsCtrl.data.image == null ? 'img/img_not_found.svg' : detailsCtrl.data.image; }}')">
+				style="background-image: url('{{ detailsCtrl.data.image == null ? (detailsCtrl.data.image_thumb == null ? 'img/img_not_found.svg' : detailsCtrl.data.image_thumb) : detailsCtrl.data.image }}')">
 		<div class="content">
 			<button class="button button-large button-clear flat waves-effect waves-button waves-light icon ion-share pull-right text-white" ng-click="detailsCtrl.socialSharing()"></button>
 		</div>
 	</div>
 	<div class="mid-bar dark-bg z1 padding">
-		<h3 ng-bind-html="detailsCtrl.data.name"></h3>
+		<h3 ng-show="detailsCtrl.data.name != null" ng-bind-html="detailsCtrl.data.name"></h3>
+		<h3 ng-show="detailsCtrl.data.name == null && detailsCtrl.data.place_name != null" ng-bind-html="detailsCtrl.data.place_name"></h3>
 		<p>
 			<i class="icon ion-clock"></i>
-			{{(detailsCtrl.data.open|date:"HH:mm dd-MMM")}} - {{ detailsCtrl.data.price == null ? "" : detailsCtrl.data.price}}
+			<span ng-show="detailsCtrl.data.open == null">Ouvert</span>
+			<span ng-show="detailsCtrl.data.open != null">{{ (detailsCtrl.data.open|date:"HH:mm dd/MM")+" - "+(detailsCtrl.data.end|date:"HH:mm dd/MM") }}</span>
+			<span ng-hide="detailsCtrl.data.price == null">
+				<br />
+				<i class="icon ion-cash"></i> {{ detailsCtrl.data.price }}
+			</span>
 		</p>
 	</div>
 	<div class="content double-padding">
-		<h4 class="positive">Description</h4>
-		<p ng-bind-html="detailsCtrl.data.description" class="text-muted"></p>
-        
-        <h3 class="positive">Le lieu</h4>
+    <h3 class="positive">Le lieu</h4>
 		<h5 ng-bind-html="detailsCtrl.data.place_name" class="positive"></h5>
 		<p ng-bind-html="detailsCtrl.data.address" class="propositionAdress text-muted"></p>
+
+		<h3 class="positive" ng-hide="detailsCtrl.data.description == null">Description</h3>
+		<p ng-bind-html="detailsCtrl.data.description" class="text-muted"></p>
 	</div>
 </div>
