@@ -6,7 +6,6 @@ angular.module("app")
     
         mV.getData = function (){
             mV.data = dataService.getDataById($stateParams.dataID);
-            console.log(mV.data);
         }
     
 		mV.socialSharing = function() {
