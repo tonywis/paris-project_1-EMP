@@ -40,10 +40,18 @@ angular.module('app')
             
             var randInt = Math.floor(Math.random()*results.length);
             var dataChoosed= results[randInt];
-            var dateOpen_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour;
-            var hourOpen_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_start;
-            var dateEnd_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour;
-            var hourEnd_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_end;
+            if(dataChoosed.occurrences) {
+                var dateOpen_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour;
+                var hourOpen_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_start;
+                var dateEnd_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour;
+                var hourEnd_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_end;
+            }
+            else {
+                var dateOpen_str = dataChoosed.occurences[dataChoosed.occurences.length-1].jour;
+                var hourOpen_str = dataChoosed.occurences[dataChoosed.occurences.length-1].hour_start;
+                var dateEnd_str = dataChoosed.occurences[dataChoosed.occurences.length-1].jour;
+                var hourEnd_str = dataChoosed.occurences[dataChoosed.occurences.length-1].hour_end;
+            }
             var img = null;
             if(dataChoosed.files.length > 0) {
                 if(dataChoosed.files[0].file)
@@ -77,10 +85,10 @@ angular.module('app')
             return results.filter(function(d) {
                 console.log(d)
                 //take the date of each event, they are ordered chronologicaly, the latest of the array is the sooner of all
-                if(typeof d.occurrences[0] == "undefined"){
-                    return false;
-                }
-                var dateEvent = new Date(d.occurrences[d.occurrences.length-1].jour);
+                if(d.occurrences)
+                    var dateEvent = new Date(d.occurrences[d.occurrences.length-1].jour);
+                else
+                    var dateEvent = new Date(d.occurences[d.occurences.length-1].jour);
                 var dateNow = new Date();
                 
                 if(dateEvent.getDate() == dateNow.getDate() && dateEvent.getMonth() == dateNow.getMonth() && dateEvent.getFullYear() == dateNow.getFullYear())

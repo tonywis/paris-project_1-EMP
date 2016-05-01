@@ -7,7 +7,7 @@ angular.module("app")
 			"restaurant": 0,
 			"bar": 0,
 			"club": 0,
-			"spectacle": 2,
+			"spectacle": 0,
 			"concert": 0,
 			"random": 0
 		};

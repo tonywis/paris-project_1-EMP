@@ -19,7 +19,11 @@ angular.module("app")
     
     //request to get n*num concerts clubs for today
         this.get_concerts = function(num, callbackDataService) {
-            $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=concert")
+            if(locationService.position.lat != null && locationService.position.lng != null)
+                url = "http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&geofilter.distance="+locationService.position.lat+","+locationService.position.lng+",3000&sort=date_start&rows=100&refine.tags=concert";
+            else
+                url = "http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=concert";
+            $http.get(url)
             .then(function (results){
                 callbackDataService(transformResult(only_open(results.data), num));
             },function (error){
