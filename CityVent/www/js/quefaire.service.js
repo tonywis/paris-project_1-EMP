@@ -1,9 +1,15 @@
 angular.module('app')
-.service('QueFaireService', function($http,APIKeys){
+.service('QueFaireService', function($http,APIKeys, locationService){
     
     //request to get num*clubs for today
     this.get_activities =function(categorie,limit,num, callbackDataService){
-        $http.get("https://api.paris.fr/api/data/1.4/QueFaire/get_activities/?token="+APIKeys.PARIS_TOKEN+"&cid="+categorie+"&tag=&created=0&start=0&end=0&offset=0&limit="+limit)
+        var url;
+        if(locationService.position.lat != null && locationService.position.lng != null)
+            url = "https://api.paris.fr/api/data/1.4/QueFaire/get_geo_activities/?token="+APIKeys.PARIS_TOKEN+"&cid="+categorie+"&tag=&created=0&start=0&end=0&lat="+locationService.position.lat+"&lon="+locationService.position.lng+"&radius=3000&offset=0&limit="+limit;
+        else
+            url = "https://api.paris.fr/api/data/1.4/QueFaire/get_activities/?token="+APIKeys.PARIS_TOKEN+"&cid="+categorie+"&tag=&created=0&start=0&end=0&offset=0&limit="+limit;
+        
+        $http.get(url)
         .then(function (results){
             callbackDataService(transformResult(only_open(results.data.data),num));
         },function (error){
@@ -37,14 +43,21 @@ angular.module('app')
             var hourOpen_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_start;
             var dateEnd_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour;
             var hourEnd_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].hour_end;
+            var img = null;
+            if(dataChoosed.files.length > 0) {
+                if(dataChoosed.files[0].file)
+                    img = "http://filer.paris.fr/"+dataChoosed.files[0].file;
+                else if(dataChoosed.files[0].path)
+                    img = dataChoosed.files[0].path;
+            }
             var randObject = {
                 "address": dataChoosed.adresse,
                 "place_name": dataChoosed.lieu,
                 "name": dataChoosed.nom,
                 "small_description": he.decode(dataChoosed.small_description),
                 "description": he.decode(dataChoosed.description),
-                "image_thumb": null,
-                "image": null,
+                "image_thumb": img,
+                "image": img,
                 "price": null,
                 "link": null,
                 //merge for good date format
