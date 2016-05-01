@@ -1,0 +1,34 @@
+<ion-header-bar class="bar-positive">
+	<button class="button button-icon icon ion-arrow-left-c flat" ng-click="detailsCtrl.back()"></button>
+	<h1 class="title">Détails</h1>
+</ion-header-bar>
+
+<div class="ionic has-header details" ng-init="detailsCtrl.getData()">
+	<div class="hero has-mask"
+				style="background-image: url('{{ detailsCtrl.data.image == null ? (detailsCtrl.data.image_thumb == null ? 'img/img_not_found.svg' : detailsCtrl.data.image_thumb) : detailsCtrl.data.image }}')">
+		<div class="content">
+			<button class="button button-large button-clear flat waves-effect waves-button waves-light icon ion-share pull-right text-white" ng-click="detailsCtrl.socialSharing()"></button>
+		</div>
+	</div>
+	<div class="mid-bar dark-bg z1 padding">
+		<h3 ng-show="detailsCtrl.data.name != null" ng-bind-html="detailsCtrl.data.name"></h3>
+		<h3 ng-show="detailsCtrl.data.name == null && detailsCtrl.data.place_name != null" ng-bind-html="detailsCtrl.data.place_name"></h3>
+		<p>
+			<i class="icon ion-clock"></i>
+			<span ng-show="detailsCtrl.data.open == null">Ouvert</span>
+			<span ng-show="detailsCtrl.data.open != null">{{ (detailsCtrl.data.open|date:"HH:mm dd/MM")+" - "+(detailsCtrl.data.end|date:"HH:mm dd/MM") }}</span>
+			<span ng-hide="detailsCtrl.data.price == null">
+				<br />
+				<i class="icon ion-cash"></i> {{ detailsCtrl.data.price }}
+			</span>
+		</p>
+	</div>
+	<div class="content double-padding">
+    <h3 class="positive">Le lieu</h4>
+		<h5 ng-bind-html="detailsCtrl.data.place_name" class="positive"></h5>
+		<p ng-bind-html="detailsCtrl.data.address" class="propositionAdress text-muted"></p>
+
+		<h3 class="positive" ng-hide="detailsCtrl.data.description == null">Description</h3>
+		<p ng-bind-html="detailsCtrl.data.description" class="text-muted"></p>
+	</div>
+</div>

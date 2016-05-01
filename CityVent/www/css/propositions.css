@@ -1,0 +1,59 @@
+.propositions {
+  height: 100%;
+  overflow: scroll;
+  padding-bottom: 45px
+}
+
+.card-animation.ng-enter {
+  animation: card-enter 1000ms cubic-bezier(0.445, 0.050, 0.550, 1);
+  opacity: 0;
+  display: block;
+  position: relative;
+}
+
+.card-animation.ng-enter.ng-enter-active {
+  opacity: 0;
+}
+
+.card-animation.ng-leave {
+  opacity: 1;
+}
+
+.card-animation.ng-leave.ng-leave-active {
+  opacity: 0;
+}
+@keyframes card-enter {
+  from {
+    opacity: 0;
+    top: 300px;
+    height: 0px;
+    left: -500px;
+  }
+  75% {
+    left: 10px;
+    opacity: 0.9;
+  }
+  to {
+    opacity: 1;
+    top: 0px;
+    height: auto;
+    left: 0px;
+  }
+}
+
+.icon-size {
+  font-size: 75px;
+}
+
+.prop{
+  white-space: normal;  
+}
+
+.bg-color {
+  background-color: #ebebeb;
+}
+
+.propositionAdress{
+    color: grey !important;
+    margin-bottom: 10px !important;
+}

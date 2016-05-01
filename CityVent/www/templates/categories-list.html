@@ -1,0 +1,54 @@
+
+<ion-header-bar align-title="center" class="bar-positive">
+  <h1 class="title title-center header-item">Accueil</h1>  
+</ion-header-bar>
+
+<div class="content has-header categories" >
+	<div class="list condensed-space no-padding" ng-init="categoriesCtrl.imageBkg()">
+		<div class="card dark-bg" ng-click="categoriesCtrl.onClickCategorie('restaurant')" on-hold="categoriesCtrl.resetCateg('restaurant'); " ng-style="{'background-image':'url('+categoriesCtrl.restaurantBkg+')'}" ng-class="categoriesCtrl.restaurantBkg ? 'categories-animation-display' : 'categories-animation-hide'" style="animation-delay: 0ms" >
+			<a href="" class="mon_a ">
+				<h2>Restaurants</h2>
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.dataService.request.restaurant == 0">{{ categoriesCtrl.dataService.request.restaurant }}</span>
+			</a>
+		</div>
+
+		<div class="card dark-bg" ng-click="categoriesCtrl.onClickCategorie('bar')" on-hold="categoriesCtrl.resetCateg('bar')"  ng-style="{'background-image':'url('+categoriesCtrl.barBkg+')'}" ng-class="categoriesCtrl.restaurantBkg ? 'categories-animation-display' : 'categories-animation-hide'" style="animation-delay: 250ms">
+			<a href="" class="mon_a ">
+				<h2>Bars</h2>
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.dataService.request.bar == 0">{{ categoriesCtrl.dataService.request.bar }}</span>
+			</a>
+		</div>
+
+		<div class="card dark-bg" ng-click="categoriesCtrl.onClickCategorie('club')" on-hold="categoriesCtrl.resetCateg('club')" ng-style="{'background-image':'url('+categoriesCtrl.clubBkg+')'}" ng-class="categoriesCtrl.restaurantBkg ? 'categories-animation-display' : 'categories-animation-hide'" style="animation-delay: 500ms">
+			<a href="" class="mon_a ">
+				<h2>Clubs</h2>
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.dataService.request.club == 0">{{ categoriesCtrl.dataService.request.club }}</span>
+
+			</a>
+		</div>
+
+		<div class="card dark-bg" ng-click="categoriesCtrl.onClickCategorie('spectacle')" on-hold="categoriesCtrl.resetCateg('spectacle')" ng-style="{'background-image':'url('+categoriesCtrl.spectacleBkg+')'}" ng-class="categoriesCtrl.restaurantBkg ? 'categories-animation-display' : 'categories-animation-hide'" style="animation-delay: 750ms">
+			<a href="" class="mon_a ">
+				<h2>Spectacles</h2>
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.dataService.request.spectacle == 0">{{ categoriesCtrl.dataService.request.spectacle }}</span>
+			</a>
+		</div>
+
+		<div class="card dark-bg" ng-click="categoriesCtrl.onClickCategorie('concert')" on-hold="categoriesCtrl.resetCateg('concert')" ng-style="{'background-image':'url('+categoriesCtrl.concertBkg+')'}" ng-class="categoriesCtrl.restaurantBkg ? 'categories-animation-display' : 'categories-animation-hide'" style="animation-delay: 1000ms">
+			<a href="" class="mon_a ">
+				<h2>Concerts</h2>
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.dataService.request.concert == 0">{{ categoriesCtrl.dataService.request.concert }}</span>
+			</a>
+		</div>
+
+		<div class="card dark-bg" ng-click="categoriesCtrl.onClickCategorie('random')" on-hold="categoriesCtrl.resetCateg('random')" ng-style="{'background-image':'url('+categoriesCtrl.randomBkg+')'}" ng-class="categoriesCtrl.restaurantBkg ? 'categories-animation-display' : 'categories-animation-hide'" style="animation-delay: 1250ms">
+			<a href="" class="mon_a " >
+				<h2>Random</h2>
+				<span class="badge badge-assertive" ng-hide="categoriesCtrl.dataService.request.random == 0">{{ categoriesCtrl.dataService.request.random }}</span>
+			</a>
+		</div>
+		
+	</div>
+	<div class="ion-arrow-right-c flat icon-right button-calm" ng-class="categoriesCtrl.dataService.getNbSelected() > 0 ? 'button-next-to-display' : (categoriesCtrl.first ? '' : 'button-next-to-hide')" ng-click="categoriesCtrl.nextStep()">
+	</div>
+</div>
