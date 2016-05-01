@@ -52,3 +52,8 @@
 .bg-color {
   background-color: #ebebeb;
 }
+
+.propositionAdress{
+    color: grey !important;
+    margin-bottom: 10px !important;
+}

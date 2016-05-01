@@ -1,7 +1,14 @@
 angular.module("app")
-	.controller('detailsController', function($cordovaSocialSharing, $ionicHistory){
+	.controller('detailsController', function($cordovaSocialSharing, $ionicHistory ,$stateParams, dataService){
 		mV = this;
-
+    
+        mV.data= [];
+    
+        mV.getData = function (){
+            mV.data = dataService.getDataById($stateParams.dataID);
+            console.log(mV.data);
+        }
+    
 		mV.socialSharing = function() {
 			var message = null;
 			var subject = null;

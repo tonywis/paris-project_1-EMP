@@ -11,16 +11,17 @@
         </div>
     </div>
     <div ng-repeat="(key, p) in propositionsCtrl.data track by $index" class="card-animation card" style="animation-delay: {{($index * 80)}}ms">
-            <div ui-sref="details({dataID: key})" class="item item-avatar waves-effect waves-block waves-dark prop">
-                <span class="avatar" style="background-image: url('{{ p.image_thumb == null ? 'img/img_not_found.svg' : p.image_thumb; }}')"></span>
-                <strong ng-bind-html="p.name == null ? p.place_name : p.name" class="prop"></strong>
-                <p ng-bind-html="p.address" style="color: grey; margin-bottom: 10px;"></p>
-                <span ng-bind-html="p.small_description|htmlToPlaintext" class="prop" ng-show="p.small_description != null"></span>
-                <div class="card-footer text-left">
-                    <i class="icon ion-clock"></i>
-                    <span ng-show="p.open == null">Ouvert</span>
-                    <span ng-show="p.open != null">{{ (p.open|date:"HH:mm")+" - "+(p.end|date:"HH:mm") }}</span>
-                </div>
+        <div ui-sref="details({dataID: key})" class="item item-avatar waves-effect waves-block waves-dark prop">
+            <span class="avatar" style="background-image: url('{{ p.image_thumb == null ? 'img/img_not_found.svg' : p.image_thumb; }}')"></span>
+
+            <strong ng-bind-html="p.name == null ? p.place_name : p.name" class="prop"></strong>
+            <p ng-bind-html="p.address" class="propositionAdress"></p>
+            <span ng-bind-html="p.small_description|htmlToPlaintext" class="prop" ng-show="p.small_description != null"></span>
+            <div class="card-footer text-left">
+                <i class="icon ion-clock"></i>
+                <span ng-show="p.open == null">Ouvert</span>
+                <span ng-show="p.open != null">{{ (p.open|date:"HH:mm")+" - "+(p.end|date:"HH:mm") }}</span>
             </div>
+        </div>
     </div>
 </div>

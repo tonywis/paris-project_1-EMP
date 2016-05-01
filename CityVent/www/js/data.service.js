@@ -1,12 +1,13 @@
 angular.module("app")
 	.service('dataService', function(QueFaireService, openDataService, googlePlacesService) {
 		var sD = this;
+    
 		sD.data = [];
 		sD.request = {
 			"restaurant": 0,
 			"bar": 0,
 			"club": 0,
-			"spectacle": 0,
+			"spectacle": 2,
 			"concert": 0,
 			"random": 0
 		};
@@ -61,8 +62,14 @@ angular.module("app")
 		sD.startClub = function(callback, nb) {
 			// openData Clubbing
 			sD.addLoading();
+<<<<<<< HEAD
 			openDataService.get_clubs(nb, function(results) {
 				sD.onFinish(callback, results);
+=======
+			openDataService.get_clubs(sD.request.club, function(results) {
+                console.log(results);
+				sD.onFinish(callbackCtrl, results);
+>>>>>>> details view integration
 			});
 		}
 
