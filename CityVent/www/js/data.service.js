@@ -34,10 +34,10 @@ angular.module("app")
 				sD.startClub(callbackCtrl, sD.request.club);
 
 			if(sD.request.spectacle > 0)
-				sD.startSpectacle(callbackCtrl, sD.request.concert);
+				sD.startSpectacle(callbackCtrl, sD.request.spectacle);
 
 			if(sD.request.concert > 0)
-				sD.startConcert(callbackCtrl, sD.request.spectacle);
+				sD.startConcert(callbackCtrl, sD.request.concert);
 
 			if(sD.request.random > 0)
 				sD.startRandom(callbackCtrl);
@@ -62,14 +62,8 @@ angular.module("app")
 		sD.startClub = function(callback, nb) {
 			// openData Clubbing
 			sD.addLoading();
-<<<<<<< HEAD
 			openDataService.get_clubs(nb, function(results) {
 				sD.onFinish(callback, results);
-=======
-			openDataService.get_clubs(sD.request.club, function(results) {
-                console.log(results);
-				sD.onFinish(callbackCtrl, results);
->>>>>>> details view integration
 			});
 		}
 

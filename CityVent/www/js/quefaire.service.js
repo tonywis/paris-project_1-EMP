@@ -26,11 +26,12 @@ angular.module('app')
         //if no results, return nothing
         if(results.length == 0)
             return formated;
-
+        
         //take the minimun between the numbers of data and the numbers asked
         num = results.length < num ? results.length : num;
-
+        
         for(var i=0; i<num; i++) {
+            
             var randInt = Math.floor(Math.random()*results.length);
             var dataChoosed= results[randInt];
             var dateOpen_str = dataChoosed.occurrences[dataChoosed.occurrences.length-1].jour;
@@ -61,8 +62,9 @@ angular.module('app')
         function only_open(results) {
             
             return results.filter(function(d) {
+                console.log(d)
                 //take the date of each event, they are ordered chronologicaly, the latest of the array is the sooner of all
-                if(d.occurrences.length[0] !== undefined){
+                if(typeof d.occurrences[0] == "undefined"){
                     return false;
                 }
                 var dateEvent = new Date(d.occurrences[d.occurrences.length-1].jour);
