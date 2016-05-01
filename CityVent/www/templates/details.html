@@ -11,7 +11,8 @@
 		</div>
 	</div>
 	<div class="mid-bar dark-bg z1 padding">
-		<h3 ng-bind-html="detailsCtrl.data.name"></h3>
+		<h3 ng-show="detailsCtrl.data.name != null" ng-bind-html="detailsCtrl.data.name"></h3>
+		<h3 ng-show="detailsCtrl.data.name == null && detailsCtrl.data.place_name != null" ng-bind-html="detailsCtrl.data.place_name"></h3>
 		<p>
 			<i class="icon ion-clock"></i>
 			<span ng-show="detailsCtrl.data.open == null">Ouvert</span>
