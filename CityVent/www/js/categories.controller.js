@@ -25,8 +25,8 @@ angular.module('app')
 			 	 dataService.request.concert += cV.addWithLimit(dataService.request.concert);
 				 break;
 			 case 'random' :
-				 dataService.request.random += cV.addWithLimit(dataService.request.random);
-			 break;			 	 
+				 dataService.request.random = 1;
+			 break;
 		}
 		cV.first = false;
 	}

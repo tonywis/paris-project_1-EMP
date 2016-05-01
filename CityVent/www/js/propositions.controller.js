@@ -17,7 +17,6 @@ angular.module('app')
 	}
 
 	propositionsCtrl.startRequest = function() {
-		console.log(dataService.has_requests());
 		if(dataService.has_requests()) {
 			$ionicLoading.show();
 			dataService.launch(propositionsCtrl.onFinish);
@@ -31,6 +30,5 @@ angular.module('app')
 	}
 
 	propositionsCtrl.startRequest();
-
 
 });

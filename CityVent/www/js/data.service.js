@@ -12,77 +12,124 @@ angular.module("app")
 		};
 		// nb request in progress
 		sD.loading = 0;
+		sD.randomIncrement = 0;;
 
-		sD.onFinish = function(callbackCtrl, results) {
+		sD.onFinish = function(callback, results) {
 			sD.data = sD.data.concat(results);
 			sD.subLoading();
-			callbackCtrl();
+			callback();
 		}
 		
 		sD.launch = function(callbackCtrl) {
 			sD.data = [];
+			sD.randomIncrement = 0;
 			if(sD.request.restaurant > 0)
-				sD.startRestaurant(callbackCtrl);
+				sD.startRestaurant(callbackCtrl, sD.request.restaurant);
             
 			if(sD.request.bar > 0)
-				sD.startBar(callbackCtrl);
+				sD.startBar(callbackCtrl, sD.request.bar);
 
 			if(sD.request.club > 0)
-				sD.startClub(callbackCtrl);
+				sD.startClub(callbackCtrl, sD.request.club);
 
 			if(sD.request.spectacle > 0)
-				sD.startSpectacle(callbackCtrl);
+				sD.startSpectacle(callbackCtrl, sD.request.concert);
 
 			if(sD.request.concert > 0)
-				sD.startConcert(callbackCtrl);
+				sD.startConcert(callbackCtrl, sD.request.spectacle);
 
 			if(sD.request.random > 0)
 				sD.startRandom(callbackCtrl);
 		};
 
-		sD.startRestaurant = function(callbackCtrl) {
+		sD.startRestaurant = function(callback, nb) {
 			// Google place
 			sD.addLoading();
-			googlePlacesService.get_restaurant(sD.request.restaurant, function(results) {
-				sD.onFinish(callbackCtrl, results);
+			googlePlacesService.get_restaurant(nb, function(results) {
+				sD.onFinish(callback, results);
 			});
 		}
 
-		sD.startBar = function(callbackCtrl) {
+		sD.startBar = function(callback, nb) {
 			// Google place
 			sD.addLoading();
-			googlePlacesService.get_bar(sD.request.bar, function(results) {
-				sD.onFinish(callbackCtrl, results);
+			googlePlacesService.get_bar(nb, function(results) {
+				sD.onFinish(callback, results);
 			});
 		}
 
-		sD.startClub = function(callbackCtrl) {
+		sD.startClub = function(callback, nb) {
 			// openData Clubbing
 			sD.addLoading();
-			openDataService.get_clubs(sD.request.club, function(results) {
-				sD.onFinish(callbackCtrl, results);
+			openDataService.get_clubs(nb, function(results) {
+				sD.onFinish(callback, results);
 			});
 		}
 
-		sD.startConcert = function(callbackCtrl) {
+		sD.startConcert = function(callback, nb) {
 			// openData Concerts
 			sD.addLoading();
-			openDataService.get_concerts(sD.request.concert, function(results) {
-				sD.onFinish(callbackCtrl, results);
+			openDataService.get_concerts(nb, function(results) {
+				sD.onFinish(callback, results);
 			});
 		}
 
-		sD.startSpectacle = function(callbackCtrl) {
+		sD.startSpectacle = function(callback, nb) {
 			// Paris API
 			sD.addLoading();
-			QueFaireService.get_activities("2",10, sD.request.spectacle, function(results) {
-				sD.onFinish(callbackCtrl, results);
+			QueFaireService.get_activities("2",10, nb, function(results) {
+				sD.onFinish(callback, results);
 			});
 		}
 
-		sD.startRandom = function(callbackCtrl) {
+		sD.startRandom = function(callback) {
 			// Google place or openDataEvenements
-			// QU'EST-CE QU'ON FAIT ?
+			if(sD.randomIncrement >= 15) {
+				callback();
+				return;
+			}
+			sD.randomIncrement++;
+			var requestRandom = randomizeChoice(sD.request.random);
+
+			if(requestRandom.restaurant > 0)
+				sD.startRestaurant(function() {
+					if(sD.data.length == 0)
+						sD.startRandom(callback);
+					else
+						callback();
+				}, requestRandom.restaurant);
+            
+			if(requestRandom.bar > 0)
+				sD.startBar(function() {
+					if(sD.data.length == 0)
+						sD.startRandom(callback);
+					else
+						callback();
+				}, requestRandom.bar);
+
+			if(requestRandom.club > 0)
+				sD.startClub(function() {
+					if(sD.data.length == 0)
+						sD.startRandom(callback);
+					else
+						callback();
+				}, requestRandom.club);
+
+			if(requestRandom.spectacle > 0)
+				sD.startSpectacle(function() {
+					if(sD.data.length == 0)
+						sD.startRandom(callback);
+					else
+						callback();
+				}, requestRandom.concert);
+
+			if(requestRandom.concert > 0)
+				sD.startConcert(function() {
+					if(sD.data.length == 0)
+						sD.startRandom(callback);
+					else
+						callback();
+				}, requestRandom.spectacle);
 		}
 
 		sD.sortData = function() {
@@ -120,6 +167,37 @@ angular.module("app")
 				return sD.data[id];
 			}
 			return null;
+		}
+
+		function randomizeChoice(nbRandom) {
+			requestRandom = {
+				"restaurant": 0,
+				"bar": 0,
+				"club": 0,
+				"spectacle": 0,
+				"concert": 0
+			};
+			for (var i=0; i<nbRandom; i++) {
+				var nb = Math.floor(Math.random() * 5);
+				switch (nb) {
+					case 0 :
+						requestRandom.restaurant = requestRandom.restaurant + 1;
+						break;
+					case 1:
+						requestRandom.bar = requestRandom.bar + 1;
+						break;
+					case 2 :
+						requestRandom.club = requestRandom.club + 1;
+						break;
+					case 3 :
+						requestRandom.spectacle = requestRandom.spectacle + 1;
+						break;
+					case 4 :
+						requestRandom.concert = requestRandom.concert + 1;
+						break;
+				}
+			}
+			return requestRandom;
 		}
 
 	});
