@@ -83,7 +83,6 @@ angular.module('app')
         function only_open(results) {
             
             return results.filter(function(d) {
-                console.log(d)
                 //take the date of each event, they are ordered chronologicaly, the latest of the array is the sooner of all
                 if(d.occurrences)
                     var dateEvent = new Date(d.occurrences[d.occurrences.length-1].jour);
