@@ -41,7 +41,7 @@ angular.module('app')
             var randInt = Math.floor(Math.random()*results.length);
             var dataChoosed= results[randInt];
             var randObject=  {
-                "address": dataChoosed.formatted_address,
+                "address": dataChoosed.formatted_address ? dataChoosed.formatted_address : dataChoosed.vicinity,
                 "place_name": dataChoosed.name,
                 "name": null,
                 "small_description": null,
@@ -54,6 +54,7 @@ angular.module('app')
                 "end": null
             };
             formated.push(randObject);
+            results.splice(randInt, 1);
         }
         return formated;
     }
