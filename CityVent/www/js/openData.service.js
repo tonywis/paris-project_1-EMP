@@ -1,9 +1,14 @@
 angular.module("app")
-	.service('openDataService', function($http){
+	.service('openDataService', function($http, locationService){
     
     //request to get n*num clubs for today
         this.get_clubs = function(num, callbackDataService) {
-            $http.get("http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=clubbing")
+            var url;
+            if(locationService.position.lat != null && locationService.position.lng != null)
+                url = "http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&geofilter.distance="+locationService.position.lat+","+locationService.position.lng+",3000&sort=date_start&rows=100&refine.tags=clubbing";
+            else
+                url = "http://opendata.paris.fr//api/records/1.0/search/?dataset=evenements-a-paris&sort=date_start&rows=100&refine.tags=clubbing";
+            $http.get(url)
             .then(function (results){
                 //console.log(results);
                 callbackDataService(transformResult(only_open(results.data), num));

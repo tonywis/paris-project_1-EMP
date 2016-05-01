@@ -33,10 +33,10 @@ angular.module("app")
 				sD.startClub(callbackCtrl, sD.request.club);
 
 			if(sD.request.spectacle > 0)
-				sD.startSpectacle(callbackCtrl, sD.request.concert);
+				sD.startSpectacle(callbackCtrl, sD.request.spectacle);
 
 			if(sD.request.concert > 0)
-				sD.startConcert(callbackCtrl, sD.request.spectacle);
+				sD.startConcert(callbackCtrl, sD.request.concert);
 
 			if(sD.request.random > 0)
 				sD.startRandom(callbackCtrl);
